@@ -2,14 +2,19 @@ import {useEffect, useState} from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import axios from "axios";
 
 function App() {
-    const [greeting, setGreeting] = useState('')
+    const [greetings, setGreetings] = useState<string>('')
+
     useEffect(() => {
-        fetch('/api')
-            .then(res => res.text())
-            .then(setGreeting)
-    }, [])
+        axios.get('/api').then(({data}) => {
+            setGreetings(data)
+        }).catch(e => {
+            console.log(e)
+        })
+    }, []);
+
 
     return (
         <>
@@ -21,8 +26,7 @@ function App() {
                     <img src={reactLogo} className="logo react" alt="React logo"/>
                 </a>
             </div>
-            <h1>{greeting}</h1>
-
+            <h1>{greetings}</h1>
         </>
     )
 }
