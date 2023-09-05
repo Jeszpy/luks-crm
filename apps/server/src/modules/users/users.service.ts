@@ -13,4 +13,8 @@ export class UsersService {
   async findAllUsers(dto: UsersPagination) {
     return this.prisma.user.findMany({ skip: dto.skip(), take: dto.pageSize });
   }
+
+  findUserById(id: string) {
+    return this.prisma.user.findUnique({ where: { id } });
+  }
 }

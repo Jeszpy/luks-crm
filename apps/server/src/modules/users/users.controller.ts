@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersPagination } from '../../helpers/pagination/users.pagination';
@@ -15,5 +23,9 @@ export class UsersController {
   @Get()
   async findAllUsers(@Query() dto: UsersPagination) {
     return this.usersService.findAllUsers(dto);
+  }
+  @Get(':id')
+  async findUserById(@Param('id', ParseUUIDPipe) id: string) {
+    return this.usersService.findUserById(id);
   }
 }
