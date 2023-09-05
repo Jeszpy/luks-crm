@@ -9,6 +9,6 @@
   },
   "private": true,
   "engines": {
-    "node": ">=18 <20"
+    "node": ">=18"
   }
 }
